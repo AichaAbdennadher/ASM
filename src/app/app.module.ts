@@ -8,13 +8,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { StatutsComponent} from './statuts/statuts.component';
 import { DemandePauseComponent } from './demande-pause/demande-pause.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
     StatutsComponent,
-    DemandePauseComponent 
+    DemandePauseComponent,
+    AdminHeaderComponent 
     
   ],
   imports: [

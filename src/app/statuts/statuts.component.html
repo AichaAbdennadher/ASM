@@ -1,4 +1,4 @@
-<!-- <app-header-admin></app-header-admin> -->
+<app-admin-header></app-admin-header>
 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
         <!-- Start coding here -->
@@ -18,12 +18,22 @@
                     </form>
                 </div>
                 <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <button type="button"  class="flex items-center justify-center text-white bg-teal-500 hover:bg-teal-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                    <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                        </svg> 
-                       Add status
-                    </button>
+                  <button type="button"
+  class="flex items-center justify-center text-white font-medium rounded-lg text-sm px-4 py-2"
+  style="background-color: #d6672b;"
+  (mouseover)="isHover = true"
+  (mouseout)="isHover = false"
+  [style.backgroundColor]="isHover ? '#b85622' : '#d6672b'">
+  
+  <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path clip-rule="evenodd" fill-rule="evenodd"
+      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+  </svg>
+  Add status
+</button>
+
+
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -42,7 +52,18 @@
                   <tr *ngFor="let statut of statuts" class="border-b dark:border-gray-700">
                       <td class="px-4 py-3">{{ statut.id }}</td>
                       <td class="px-4 py-3">{{ statut.libelle }}</td>
-                      <td class="px-4 py-3">{{ statut.couleur}}</td>
+                      <td class="px-4 py-3">
+
+                          <span
+    [ngStyle]="{
+      'background-color': getStatusColor(statut.couleur),
+      width: '16px',
+      height: '16px',
+      'border-radius': '50%',
+      display: 'inline-block'
+    }"
+  ></span>
+                      </td>
                    
                   <td class="px-4 py-3"><a href="javascript:void(0);" onClick="openModalUpdate('. $row[0].')">
                 <span class="relative px-1 py-0.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
@@ -55,7 +76,7 @@
 <i class='bx bxs-trash' style="color: rgb(225, 114, 114); font-size: 1.2rem;"></i>
     </span>
 </a>
-                      </td>';
+                      </td>
                     </tr>
                 </tbody>
                 </table>

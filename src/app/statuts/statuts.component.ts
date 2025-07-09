@@ -15,6 +15,33 @@ export class StatutsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchStatuts(); //  Appel automatique au démarrage
   }
+isHover = false;
+getStatusColor(status: string ){
+  console.log('Statut reçu :', status);
+ 
+  switch (status.toLowerCase()) {
+    case 'rouge':
+      return '#EF4444';
+    case 'jaune':
+      return '#FACC15';
+    case 'vert':
+      return '#22C55E';
+    case 'bleu':
+      return '#3B82F6';
+    case 'gris':
+      return '#6B7280';
+    case 'orange':
+      return '#F97316';
+    case 'violet':
+      return '#A78BFA';
+    case 'rose':
+      return '#F472B6';
+    case 'marron':
+      return '#92400E';
+    default:
+      return '#9CA3AF'; // gris clair si couleur non reconnue
+  }
+}
 
   fetchStatuts(): void {
     this.statutService.getAllStatuts().subscribe(
