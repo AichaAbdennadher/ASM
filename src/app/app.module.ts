@@ -1,17 +1,21 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { StatutsComponent} from './statuts/statuts.component';
+import { DemandePauseComponent } from './demande-pause/demande-pause.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    StatutsComponent,
+    DemandePauseComponent 
+    
   ],
   imports: [
     BrowserModule,
@@ -20,6 +24,8 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
   HttpClientModule
   ],
+schemas: [CUSTOM_ELEMENTS_SCHEMA], // ✅ ajoute cette ligne
+
   providers: [],
   bootstrap: [AppComponent]
 })

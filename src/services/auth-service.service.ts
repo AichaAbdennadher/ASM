@@ -12,14 +12,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  login(data: { email: string; password: string }) {
-    return this.http.post(`${this.apiUrl}/login`, data).pipe(
-      tap((res: any) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('user', JSON.stringify(res.user));
-      })
-    );
-  }
+login(data: any) {
+  return this.http.post<any>('http://127.0.0.1:8000/api/login', data).pipe(
+    tap(res => {
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('user', JSON.stringify(res.user)); // ← Important !
+    })
+  );
+}
+
 
   logout() {
     return this.http.post(`${this.apiUrl}/logout`, {}).pipe(

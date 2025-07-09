@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
     this.auth.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
         const role = this.auth.getUserRole();
-        if (role === 0) this.router.navigate(['/admin-dashboard']);
-        else           this.router.navigate(['/client-dashboard']);
+        if (role === 0) this.router.navigate(['/statuts']);
+        else           this.router.navigate(['/demandePause']);
       },
       error: () => this.error = 'Email ou mot de passe invalide',
     });
