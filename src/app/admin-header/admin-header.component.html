@@ -14,11 +14,28 @@
         <a routerLink="/users" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Users</a>  
       </nav>
    
- 
- <div class="account-dropdown">
-  <a href="#" class="icon-link account-icon" aria-label="Mon compte">
-    <i class="fas fa-user-circle fa-2x"></i>
+ <div class="relative ml-4 mr-2" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
+  <a href="#" aria-label="Mon compte" (click)="$event.preventDefault()">
+    <i
+      class="fas fa-user-circle fa-2x transition-colors duration-300 cursor-pointer"
+      [ngClass]="{ 'text-amber-600': showDropdown, 'text-gray-700': !showDropdown }"
+    ></i>
   </a>
+
+  <!-- Dropdown Menu -->
+  <div
+    *ngIf="showDropdown"
+    class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-md z-50"
+  >
+    <button
+      (click)="logout()"
+      class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-100"
+    >
+      Se déconnecter
+    </button>
+  </div>
 </div>
+
+
     </div>
   </header>

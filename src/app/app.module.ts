@@ -9,6 +9,12 @@ import { RegisterComponent } from './register/register.component';
 import { StatutsComponent} from './statuts/statuts.component';
 import { DemandePauseComponent } from './demande-pause/demande-pause.component';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { AddStatutComponent } from './add-statut/add-statut.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NotificationComponent } from './notification/notification.component';
+import { SuppStatutComponent } from './supp-statut/supp-statut.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +22,11 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     RegisterComponent,
     StatutsComponent,
     DemandePauseComponent,
-    AdminHeaderComponent 
+    AdminHeaderComponent,
+    PaginationComponent,
+    AddStatutComponent,
+    NotificationComponent,
+    SuppStatutComponent 
     
   ],
   imports: [
@@ -24,9 +34,15 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     AppRoutingModule,
      FormsModule,
     ReactiveFormsModule,
-  HttpClientModule
+  HttpClientModule,
+   BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass:'toast-top-right',
+      timeOut: 3000,
+      progressBar: true,
+    })
   ],
-schemas: [CUSTOM_ELEMENTS_SCHEMA], // ✅ ajoute cette ligne
+schemas: [CUSTOM_ELEMENTS_SCHEMA], 
 
   providers: [],
   bootstrap: [AppComponent]

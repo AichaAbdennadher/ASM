@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   apiUrl = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   register(data: { name: string; email: string; password: string ;job :string}) {
     return this.http.post(`${this.apiUrl}/register`, data);
@@ -22,13 +24,24 @@ login(data: any) {
 }
 
 
-  logout() {
-    return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
-      tap(() => {
-        localStorage.clear();
-      })
-    );
-  }
+logout(): Observable<any> {
+  const token = localStorage.getItem('token');
+  console.log(' Token récupéré depuis localStorage :', token); 
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  return this.http.post(`${this.apiUrl}/logout`, {}, { headers }).pipe(
+    tap(() => {
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+      console.log(' Utilisateur déconnecté.');
+    })
+  );
+}
+
+
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');

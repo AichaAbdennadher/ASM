@@ -8,14 +8,61 @@ import { StatutService } from '../../services/statut.service';
   styleUrls: ['./statuts.component.css']
 })
 export class StatutsComponent implements OnInit {
-  statuts: any[] = [];
-
-  constructor(private statutService: StatutService) {}
-
-  ngOnInit(): void {
-    this.fetchStatuts(); //  Appel automatique au démarrage
-  }
+    constructor(private statutService: StatutService) {}
+  
+statuts: any[] = [];
+currentPage = 1;
+totalPages = 1;
+showModal = false;
 isHover = false;
+selectedStatutId: number | null = null;
+showModalSupp: boolean = false;
+
+openModalSupp(id: number): void {
+  console.log("Statut ID reçu:", id); 
+  this.selectedStatutId = id;
+  this.showModalSupp = true;
+}
+
+
+supprimerStatut(id: number): void {
+  this.statutService.supprimerStatut(id).subscribe({
+    next: () => {
+      this.showModalSupp = false;
+     this.fetchStatuts(this.currentPage);
+    },
+    error: (err) => {
+      console.error(err);
+      alert("Erreur lors de la suppression");
+    }
+  });
+}
+
+  
+openModal() {
+    this.showModal = true;
+  }
+
+ handleClose() {
+    this.showModal = false;
+  }
+ngOnInit() {
+    this.fetchStatuts(this.currentPage);
+  }
+
+  fetchStatuts(page: number) {
+    this.statutService.getStatuts(page).subscribe(response => {
+      this.statuts = response.data;
+      this.currentPage = response.current_page;
+      this.totalPages = response.last_page;
+    });
+  }
+
+  onPageChanged(page: number) {
+    this.fetchStatuts(page);
+  }
+
+
 getStatusColor(status: string ){
   console.log('Statut reçu :', status);
  
@@ -43,15 +90,5 @@ getStatusColor(status: string ){
   }
 }
 
-  fetchStatuts(): void {
-    this.statutService.getAllStatuts().subscribe(
-      (res: any) => {
-        this.statuts = res;
-        console.log("statuts =", this.statuts); 
-      },
-      (error) => {
-        console.error("Erreur lors de la récupération des statuts", error);
-      }
-    );
-  }
+ 
 }

@@ -1,0 +1,20 @@
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.success {
+  background-color: #d6672b; /* orange */
+}
+
+.error {
+  background-color: #dc3545; /* rouge */
+}
