@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./add-statut.component.css']
 })
 export class AddStatutComponent {
-    @Output() statutAdded = new EventEmitter<void>(); // ✅
+    @Output() statutAdded = new EventEmitter<void>(); 
 
   statut = {
     libelle: '',
@@ -32,7 +32,7 @@ onSubmit(): void {
       next: (res) => {
         this.statut = { libelle: '', couleur: '#d6672b' };
         this.close.emit();
-        this.statutAdded.emit(); // ✅ notifier le parent
+        this.statutAdded.emit(); 
       },
       error: (err) => {
         console.error(err);

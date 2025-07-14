@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NotificationComponent } from './notification/notification.component';
 import { SuppStatutComponent } from './supp-statut/supp-statut.component';
+import { UpdateStatutComponent } from './update-statut/update-statut.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { SuppStatutComponent } from './supp-statut/supp-statut.component';
     PaginationComponent,
     AddStatutComponent,
     NotificationComponent,
-    SuppStatutComponent 
+    SuppStatutComponent,
+    UpdateStatutComponent 
     
   ],
   imports: [

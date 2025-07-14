@@ -1,7 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { StatutService } from '../../services/statut.service';
-
-
+// import { NotificationManager } from 'react-notifications'; // si tu utilises un système de notif
 @Component({
   selector: 'app-statuts',
   templateUrl: './statuts.component.html',
@@ -17,14 +16,38 @@ showModal = false;
 isHover = false;
 selectedStatutId: number | null = null;
 showModalSupp: boolean = false;
+showUpdateModal = false;
+selectedStatut = { libelle: '', couleur: '#d6672b' };
 
 openModalSupp(id: number): void {
   console.log("Statut ID reçu:", id); 
   this.selectedStatutId = id;
   this.showModalSupp = true;
 }
+openModalUpdate(id: number): void {
+  console.log("Statut ID reçu:", id); 
+  this.selectedStatut = this.statuts.find(s => s.id === id);
+  this.showUpdateModal = true;}
 
+closeUpdateModal() {
+  this.showUpdateModal = false;
+}
 
+ handleUpdate(updatedStatut: any) {
+    this.statutService.updateStatut(updatedStatut.id, updatedStatut).subscribe({
+      next: (res) => {
+        const index = this.statuts.findIndex(s => s.id === updatedStatut.id);
+        if (index !== -1) this.statuts[index] = updatedStatut;
+
+     
+
+        this.closeUpdateModal();
+      },
+      error: (err) => {
+
+console.log(err)      }
+    });
+  }
 supprimerStatut(id: number): void {
   this.statutService.supprimerStatut(id).subscribe({
     next: () => {
@@ -61,34 +84,5 @@ ngOnInit() {
   onPageChanged(page: number) {
     this.fetchStatuts(page);
   }
-
-
-getStatusColor(status: string ){
-  console.log('Statut reçu :', status);
- 
-  switch (status.toLowerCase()) {
-    case 'rouge':
-      return '#EF4444';
-    case 'jaune':
-      return '#FACC15';
-    case 'vert':
-      return '#22C55E';
-    case 'bleu':
-      return '#3B82F6';
-    case 'gris':
-      return '#6B7280';
-    case 'orange':
-      return '#F97316';
-    case 'violet':
-      return '#A78BFA';
-    case 'rose':
-      return '#F472B6';
-    case 'marron':
-      return '#92400E';
-    default:
-      return '#9CA3AF'; // gris clair si couleur non reconnue
-  }
-}
-
  
 }

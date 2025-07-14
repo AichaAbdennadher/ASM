@@ -1,0 +1,69 @@
+<div *ngIf="show" class="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-40">
+  <div class="relative p-4 w-[90%] max-w-2xl max-h-[90vh] h-auto">
+    <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-lg font-semibold text-[#d6672b] dark:text-[#fca151]">Update Statut</h3>
+        <button (click)="closeModal()" class="text-gray-400 hover:text-[#d6672b]">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form (ngSubmit)="onSubmit()" class="p-4 md:p-5">
+        <div class="mb-6">
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="libelle"
+            [(ngModel)]="statut.libelle"
+            required
+            placeholder="Statut name"
+            class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5
+                   focus:outline-none focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b]
+                   dark:bg-gray-700 dark:border-[#d6672b] dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#d6672b] dark:focus:border-[#d6672b]"
+            ngModel
+          />
+        </div>
+
+        <div class="mb-6">
+          <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose a color</label>
+          <div class="w-14 h-14 shadow overflow-hidden rounded-md">
+            <input
+              type="color"
+              id="color"
+              name="couleur"
+              [(ngModel)]="statut.couleur"
+              class="w-full h-full border-none outline-none cursor-pointer"
+              style="appearance: none; background-color: transparent;"
+              ngModel
+            />
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-2 border-t pt-4 mt-4">
+          <button
+            type="button"
+            (click)="closeModal()"
+            class="bg-gray-300 hover:bg-gray-200 px-5 py-2.5 rounded-lg text-sm font-medium">
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="text-white px-5 py-2.5 rounded-lg text-sm font-medium"
+            [style.backgroundColor]="isHoverSave ? '#b85622' : '#d6672b'"
+            (mouseover)="isHoverSave = true"
+            (mouseout)="isHoverSave = false">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

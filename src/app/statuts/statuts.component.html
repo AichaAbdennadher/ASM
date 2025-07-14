@@ -28,7 +28,7 @@
     <path clip-rule="evenodd" fill-rule="evenodd"
       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
   </svg>
-  Add status
+  Add statut
 </button>
 
 <app-add-statut
@@ -53,16 +53,20 @@
                   <tr *ngFor="let statut of statuts" class="border-b dark:border-gray-700">
                       <td class="px-4 py-3">{{ statut.id }}</td>
                       <td class="px-4 py-3">{{ statut.libelle }}</td>
-                      <td class="px-4 py-3">
-                          <span [ngStyle]="{'background-color': getStatusColor(statut.couleur), width: '16px', height: '16px', 'border-radius': '50%', display: 'inline-block' }"></span>
+                      <td class="px-4 py-3"><span [ngStyle]="{'background-color': statut.couleur, width: '16px',height: '16px','border-radius': '50%',display: 'inline-block'}"></span>
                       </td>
-                   
                   <td class="px-4 py-3">
-                    <a href="javascript:void(0);" onClick="openModalUpdate(statut.id)">
-                <span class="relative px-1 py-0.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
-                    <box-icon name="edit" color="gray" size="s"></box-icon>
-                </span>
-            </a>
+<a (click)="openModalUpdate(statut.id)" class="cursor-pointer">
+  <span class="relative px-1 py-2.5 rounded-md">
+    <box-icon name="edit" color="gray" size="s"></box-icon>
+  </span>
+</a>
+<app-update-statut
+  [show]="showUpdateModal"
+  [statut]="selectedStatut"
+  (close)="closeUpdateModal()"
+  (save)="handleUpdate($event)">
+</app-update-statut>
 <a (click)="openModalSupp(statut.id)" class="cursor-pointer">
   <span class="relative px-1 py-2.5 rounded-md">
     <box-icon name="trash" type="solid" color="rgb(252, 161, 81)" size="s"></box-icon>
