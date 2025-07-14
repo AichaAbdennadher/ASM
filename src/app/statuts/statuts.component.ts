@@ -8,7 +8,7 @@ import { StatutService } from '../../services/statut.service';
 })
 export class StatutsComponent implements OnInit {
     constructor(private statutService: StatutService) {}
-  
+searchText: string = '';
 statuts: any[] = [];
 currentPage = 1;
 totalPages = 1;

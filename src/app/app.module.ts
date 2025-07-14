@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NotificationComponent } from './notification/notification.component';
 import { SuppStatutComponent } from './supp-statut/supp-statut.component';
 import { UpdateStatutComponent } from './update-statut/update-statut.component';
+import { FilterByLibellePipe } from './filter-by-libelle.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { UpdateStatutComponent } from './update-statut/update-statut.component';
     AddStatutComponent,
     NotificationComponent,
     SuppStatutComponent,
-    UpdateStatutComponent 
+    UpdateStatutComponent,
+    FilterByLibellePipe 
     
   ],
   imports: [
