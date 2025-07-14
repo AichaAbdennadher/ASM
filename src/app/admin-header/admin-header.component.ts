@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service.service';
 @Component({
@@ -6,9 +6,22 @@ import { AuthService } from '../../services/auth-service.service';
   templateUrl: './admin-header.component.html',
   styleUrls: ['./admin-header.component.css']
 })
-export class AdminHeaderComponent {
+export class AdminHeaderComponent implements OnInit {
 showDropdown = false;
-
+ user = {
+    name: '',
+    email: '',
+    familyName:"",
+  };
+ngOnInit() {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const parsedUser = JSON.parse(userData);
+      this.user.name = parsedUser.name;
+      this.user.email = parsedUser.email;
+      this.user.familyName = parsedUser.familyName;
+    }
+  }
 toggleDropdown() {
   this.showDropdown = !this.showDropdown;
 }

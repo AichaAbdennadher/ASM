@@ -1,41 +1,66 @@
 <header class="text-gray-600 body-font sticky z-50 bg-white top-0 shadow-lg">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-<img
-  itemprop="image"
-  class="logo-scroll"
-  src="https://asmpos.com/wp-content/uploads/2023/01/logo-asmpos-noir60-2.png"
-  alt="Caisse tactile Tunisie – ASM"
-  style="width: 120px; height: auto;"
->
-      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <!-- Logo -->
+    <img
+      itemprop="image"
+      class="logo-scroll"
+      src="https://asmpos.com/wp-content/uploads/2023/01/logo-asmpos-noir60-2.png"
+      alt="Caisse tactile Tunisie – ASM"
+      style="width: 120px; height: auto;"
+    />
 
- <a routerLink="/dashboard" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Dashboard</a>
-        <a routerLink="/statuts "routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Statuts</a>
-        <a routerLink="/users" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Users</a>  
-      </nav>
-   
- <div class="relative ml-4 mr-2" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
-  <a href="#" aria-label="Mon compte" (click)="$event.preventDefault()">
-    <i
-      class="fas fa-user-circle fa-2x transition-colors duration-300 cursor-pointer"
-      [ngClass]="{ 'text-amber-600': showDropdown, 'text-gray-700': !showDropdown }"
-    ></i>
-  </a>
+    <!-- Navigation -->
+    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <a routerLink="/dashboard" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Dashboard</a>
+      <a routerLink="/statuts" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Statuts</a>
+      <a routerLink="/users" routerLinkActive="active-link" class="mr-5 font-[500] hover:text-amber-600">Users</a>
+    </nav>
 
-  <!-- Dropdown Menu -->
-  <div
-    *ngIf="showDropdown"
-    class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-md z-50"
-  >
-    <button
-      (click)="logout()"
-      class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-100"
-    >
-      Se déconnecter
-    </button>
+    <!-- Menu utilisateur -->
+    <div class="relative ml-4" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
+      <div class="flex items-center cursor-pointer">
+        <i class="fas fa-user-circle fa-lg text-gray-700 mr-2"></i>
+        <span class="text-gray-700 font-medium">{{ user.name }} </span>
+        <svg class="w-4 h-4 ml-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 011.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+        </svg>
+      </div>
+
+      <!-- Dropdown -->
+      <div *ngIf="showDropdown" class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+        <!-- User info -->
+    <div class="p-4 border-b border-gray-200">
+  <div class="flex items-center space-x-3">
+    <i class="fas fa-user-circle fa-2x text-gray-500"></i>
+    <div>
+      <p class="font-medium text-gray-800">{{ user.name }} {{ user.familyName }}</p>
+      <p class="text-sm text-gray-500">{{ user.email }}</p>
+    </div>
   </div>
 </div>
 
+        <!-- Links -->
+        <ul class="py-2">
+          <!-- <li>
+            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-home mr-2 w-4 text-gray-500"></i> Frontend
+            </a>
+          </li> -->
+          <li>
+            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-user mr-2 w-4 text-gray-500"></i> Profile
+            </a>
+          </li>
+        </ul>
 
+        <!-- Logout -->
+        <div class="border-t border-gray-200">
+          <button (click)="logout()" class="flex items-center w-full px-4 py-2 text-red-600 hover:bg-gray-100">
+            <i class="fas fa-sign-out-alt mr-2 w-4"></i> Log out
+          </button>
+        </div>
+      </div>
     </div>
-  </header>
+  </div>
+</header>
+
