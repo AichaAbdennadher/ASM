@@ -1,15 +1,16 @@
-<section class="min-h-screen items-center bg-gray-100 dark:bg-gray-900 px-4 py-8 p-10 flex flex-col justify-center">
-  <div class="flex flex-col md:flex-row w-full max-w-5xl rounded-md shadow-2xl overflow-hidden bg-white dark:bg-gray-800">
+<section class="min-h-screen items-center bg-gray-100 dark:bg-gray-900 px-4 py-8 text-white p-10 flex flex-col justify-center">
+  <div class="flex flex-col md:flex-row w-full max-w-5xl rounded-md shadow-2xl overflow-hidden bg-white dark:bg-gray-800 animate-fade-in-up">
     
     <!-- Left: Welcome -->
-    <div class="md:w-1/2 w-full bg-gradient-to-tr from-sky-600 via-sky-500 to-sky-500 text-white p-10 flex flex-col justify-center">
-      <p class="text-3xl font-bold mb-10">Focus with me</p>
+      <div class="md:w-1/2 w-full text-white p-10 flex flex-col justify-center animate-slide-in-left duration-1000"
+     style="background: linear-gradient(to top right, #d6672b, #e0a281);">
+      <p class="text-3xl font-bold mb-10">ASM, l'expert en caisses tactiles!</p>
       <p class="text-sm leading-relaxed">
-        A smart web site that helps boost your focus and makes learning joyful.
+       A company specialized in IT services and engineering, with expertise in software engineering, website creation, mobile application development, and point-of-sale (POS) systems.
       </p>
 
       <!-- Slider -->
-      <div class="relative mt-6 overflow-hidden ">
+      <div class="relative mt-6 overflow-hidden rounded-md  animate-fade-in duration-1000 delay-300">
         <div class="flex h-80 transition-transform duration-1000 ease-in-out"
              [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
           <img *ngFor="let img of images"
@@ -24,46 +25,58 @@
     <div class="md:w-1/2 w-full p-8 py-14">
       <form class="w-full px-10 space-y-5" (ngSubmit)="register()">
         <div>
-          <p class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Sign up</p>
+                <img src="../../assets/images/logo.png" alt="Logo" class="mx-auto mb4- w-45">
+
+          <!-- <p class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Sign up</p> -->
          
         </div>
 
         <div>
 
           <input type="text" name="name" [(ngModel)]="name" id="name" placeholder="Name"
-            class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white rounded-lg block w-full p-2.5"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
+         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
             required>
         </div>
         <div>
 
           <input type="text" name="FamilyName" [(ngModel)]="FamilyName" id="FamilyName" placeholder="Family Name"
-            class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white rounded-lg block w-full p-2.5"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
+         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
             required>
         </div>
         <div>
  
           <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white rounded-lg block w-full p-2.5"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
+         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
             required>
         </div>
 
         <div>
 
           <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password"
-            class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white rounded-lg block w-full p-2.5"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
+         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
             required>
         </div>
            <div>
     
           <input type="text" id="job" name="job" placeholder="job"
-            class="bg-gray-50 border border-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white rounded-lg block w-full p-2.5"
+            class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
+         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
             required>
         </div>
 
-        <button type="submit"
-          class="w-full py-4 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-md transition-all duration-300 hover:scale-[1.02]">
-          Sign up
-        </button>
+           <button type="submit"
+  style="background-color: #d6672b;"
+  class="w-full py-4 text-white font-semibold rounded-md transition-all duration-300 hover:scale-[1.02] hover:brightness-110">
+  Sign up
+</button>
+         <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
+          Already have an account?
+<a routerLink="/login" style="color: #d6672b;" class="hover:underline transition duration-300">Login here</a>
+        </p>
       </form>
     </div>
   </div>

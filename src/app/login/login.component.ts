@@ -12,10 +12,10 @@ export class LoginComponent implements OnInit {
   error = '';
 
   images: string[] = [
-    'assets/images/bg1.png',
-    'assets/images/bg2.png',
-    'assets/images/bg3.png',
-    'assets/images/bg4.png'
+    'assets/images/cc.png',
+    'assets/images/y2.png',
+    'assets/images/finn.png',
+    'assets/images/pc.png'
   ];
   
   currentIndex: number = 0;

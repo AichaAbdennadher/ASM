@@ -2,10 +2,12 @@
   <div class="flex flex-col md:flex-row w-full max-w-5xl rounded-md shadow-2xl overflow-hidden bg-white dark:bg-gray-800 animate-fade-in-up">
     
     <!-- Left: Welcome -->
-    <div class="md:w-1/2 w-full bg-gradient-to-tr from-sky-600 via-sky-500 to-sky-500 text-white p-10 flex flex-col justify-center animate-slide-in-left duration-1000">
-      <p class="text-3xl font-bold mb-10">Welcome to Focus with me</p>
+    <!-- <div class="md:w-1/2 w-full bg-gradient-to-tr from-amber-600 via-amber-500 to-amber-500 text-white p-10 flex flex-col justify-center animate-slide-in-left duration-1000"> -->
+      <div class="md:w-1/2 w-full text-white p-10 flex flex-col justify-center animate-slide-in-left duration-1000"
+     style="background: linear-gradient(to top right, #d6672b, #e0a281);">
+      <p class="text-3xl font-bold mb-10">ASM, l'expert en caisses tactiles!</p>
       <p class="text-sm leading-relaxed">
-        A smart application that helps boost your focus and makes learning joyful.
+       A company specialized in IT services and engineering, with expertise in software engineering, website creation, mobile application development, and point-of-sale (POS) systems.
       </p>
 
       <!-- Slider -->
@@ -21,35 +23,44 @@
     </div>
 
     <!-- Right: Login -->
-    <div class="md:w-1/2 w-full p-8 py-14 animate-slide-in-right duration-1000">
+    <div class="md:w-1/2 w-full p-8 py-14 animate-slide-in-right duration-1000" >
       <form class="w-full px-10 space-y-7" (ngSubmit)="login()">
         <div>
-          <p class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Login</p>
+      <img src="../../assets/images/logo.png" alt="Logo" class="mx-auto mb4- w-45">
+          <!-- <p class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">Login</p>
           <p class="text-base text-gray-500 dark:text-gray-400 pb-6">
             Welcome back! Please login to your account.
-          </p>
+          </p> -->
         </div>
 
-        <input type="email" id="email" name="Email" [(ngModel)]="email" placeholder="Email"
-  class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500
-         dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
-  required>
+     <input type="email"
+       id="email"
+       name="Email"
+       [(ngModel)]="email"
+       placeholder="Email"
+       class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none 
+              focus:ring-2 focus:ring-[#d6672b]
+              dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
+       required>
+
 
 
         <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password"
-  class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500
+  class="w-full px-5 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2  focus:ring-[#d6672b]
          dark:bg-gray-700 dark:text-white bg-white text-gray-900 transition duration-300"
   required>
 
 
-        <button type="submit"
-                class="w-full py-4 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-md transition-all duration-300 hover:scale-[1.02]">
-          Sign In
-        </button>
+      <button type="submit"
+  style="background-color: #d6672b;"
+  class="w-full py-4 text-white font-semibold rounded-md transition-all duration-300 hover:scale-[1.02] hover:brightness-110">
+  Sign In
+</button>
+
 
         <p class="text-sm text-gray-500 dark:text-gray-400 text-center">
           Don’t have an account?
-          <a routerLink="/register" class="text-sky-600 hover:underline transition duration-300">Sign up</a>
+<a routerLink="/register" style="color: #d6672b;" class="hover:underline transition duration-300">Sign up</a>
         </p>
       </form>
     </div>
