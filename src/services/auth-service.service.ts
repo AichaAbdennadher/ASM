@@ -10,9 +10,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(data: { name: string; email: string; password: string ;job :string}) {
-    return this.http.post(`${this.apiUrl}/register`, data);
-  }
+register(data: { name: string; familyName: string; email: string; password: string; job: string }) {
+  return this.http.post(`${this.apiUrl}/register`, data);
+}
+
 
 login(data: any) {
   return this.http.post<any>('http://127.0.0.1:8000/api/login', data).pipe(

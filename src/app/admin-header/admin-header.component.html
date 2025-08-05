@@ -17,7 +17,7 @@
     </nav>
 
     <!-- Menu utilisateur -->
-    <div class="relative ml-4" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
+  <div class="flex items-center cursor-pointer" (click)="toggleDropdown()">
       <div class="flex items-center cursor-pointer">
         <i class="fas fa-user-circle fa-lg text-gray-700 mr-2"></i>
         <span class="text-gray-700 font-medium">{{ user.name }} </span>
@@ -55,12 +55,13 @@
 
         <!-- Logout -->
         <div class="border-t border-gray-200">
-          <button (click)="logout()" class="flex items-center w-full px-4 py-2 text-red-600 hover:bg-gray-100">
+      <button type="button" (click)="logout() " class="flex items-center w-full px-4 py-2 text-red-600 hover:bg-gray-100">
             <i class="fas fa-sign-out-alt mr-2 w-4"></i> Log out
           </button>
         </div>
       </div>
     </div>
   </div>
+  
 </header>
 

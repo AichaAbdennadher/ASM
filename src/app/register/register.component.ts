@@ -36,8 +36,8 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       email: this.email,
       password: this.password,
-      job: this.job
-      // Ajoute FamilyName ici si nécessaire
+      job: this.job,
+      familyName :this.FamilyName
     }).subscribe({
       next: () => this.router.navigate(['/login']),
       error: err => console.error(err)

@@ -13,6 +13,8 @@ showDropdown = false;
     email: '',
     familyName:"",
   };
+    constructor(private authService: AuthService, private router: Router) {}
+
 ngOnInit() {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -27,11 +29,16 @@ toggleDropdown() {
 }
 
 closeDropdown() {
-  this.showDropdown = false;
+  setTimeout(() => {
+    this.showDropdown = false;
+  }, 150); // ⏱ attend un peu avant de fermer
 }
-  constructor(private authService: AuthService, private router: Router) {}
+
+
 
 logout() {
+    console.log('Logout cliqué');
+this.showDropdown = false;
   this.authService.logout().subscribe({
     next: () => {
       this.router.navigate(['/login']); // redirection après succès
