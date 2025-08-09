@@ -1,4 +1,4 @@
-<app-admin-header></app-admin-header>
+<app-employee-header></app-employee-header> 
 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
     <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -36,14 +36,14 @@
     <path clip-rule="evenodd" fill-rule="evenodd"
       d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
   </svg>
-  Add statut
+ Add break request
 </button>
 
-<app-add-statut
+<app-create-demande
   [show]="showModal"
   (close)="handleClose()"
-   (statutAdded)="fetchStatuts(currentPage)">
-</app-add-statut>
+   (demandeAdded)="fetchDemandes(currentPage)">
+</app-create-demande>
 </div>
             </div>
             <div class="overflow-x-auto">
@@ -52,43 +52,19 @@
                     <tr>
                       
                         <th scope="col" class="px-4 py-3">Id</th>
-                        <th scope="col" class="px-4 py-3">label</th>
-                        <th scope="col" class="px-4 py-3">color</th>
-                        <th scope="col" class="px-4 py-3">Actions</th>
+                        <th scope="col" class="px-4 py-3">Reason</th>
+                        <th scope="col" class="px-4 py-3">Release date</th>
+                        <th scope="col" class="px-4 py-3">Release time</th>
+                        <th scope="col" class="px-4 py-3">Return time</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let statut of statuts | filterByLibelle:searchText" class="border-b dark:border-gray-700">
-                      <td class="px-4 py-3">{{ statut.id }}</td>
-                      <td class="px-4 py-3">{{ statut.libelle }}</td>
-                      <td class="px-4 py-3"><span [ngStyle]="{'background-color': statut.couleur, width: '16px',height: '16px','border-radius': '50%',display: 'inline-block'}"></span>
-                      </td>
-                  <td class="px-4 py-3">
-<a (click)="openModalUpdate(statut.id)" class="cursor-pointer">
-  <span class="relative px-1 py-2.5 rounded-md">
-    <box-icon name="edit" color="gray" size="s"></box-icon>
-  </span>
-</a>
-<app-update-statut
-  [show]="showUpdateModal"
-  [statut]="selectedStatut"
-  (close)="closeUpdateModal()"
-  (save)="handleUpdate($event)">
-</app-update-statut>
-<a (click)="openModalSupp(statut.id)" class="cursor-pointer">
-  <span class="relative px-1 py-2.5 rounded-md">
-    <box-icon name="trash" type="solid" color="rgb(252, 161, 81)" size="s"></box-icon>
-  </span>
-</a>
-<app-supp-statut
-  *ngIf="showModalSupp && selectedStatutId !== null"
-  [statutId]="selectedStatutId"
-  (confirmDelete)="supprimerStatut($event)"
-  (cancel)="showModalSupp = false">
-</app-supp-statut>
-
-
-                      </td>
+                  <tr *ngFor="let demande of demandes | filterByLibelle:searchText" class="border-b dark:border-gray-700">
+                      <td class="px-4 py-3">{{demande.id }}</td>
+                      <td class="px-4 py-3">{{demande.raison}}</td>
+                      <td class="px-4 py-3">{{demande.dateSortiePause}}</td>
+                  <td class="px-4 py-3">{{demande.dateSortie}}</td>
+                      <td class="px-4 py-3">{{demande.dateRetour}}</td>
                     </tr>
                 </tbody>
                 </table>
@@ -100,4 +76,4 @@
   ></app-pagination>
         </div>
     </div>
-  </section> 
+  </section>

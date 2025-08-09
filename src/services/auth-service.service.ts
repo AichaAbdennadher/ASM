@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -42,6 +43,19 @@ logout(): Observable<any> {
   );
 }
 
+
+getCurrentUser(): any {
+  const token = localStorage.getItem('token');
+  if (!token) return null;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded;
+  } catch (error) {
+    console.error('Erreur lors du décodage du token :', error);
+    return null;
+  }
+}
 
 
   isLoggedIn(): boolean {

@@ -1,0 +1,70 @@
+<div *ngIf="show" class="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
+<div class="relative p-6 w-[60%] max-w-3xl max-h-[90vh] h-auto">
+  <div class="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 overflow-y-auto">
+      <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+     <h3 class="text-lg font-semibold dark:text-white" style="color: #d6672b;">Create New Break Request</h3>
+      <button (click)="closeModal()" class="text-gray-400 hover:text-[#d6672b]">
+  <svg class="w-4 h-4" fill="none" viewBox="0 0 14 14">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6" />
+  </svg>
+</button>
+      </div>
+
+<form (ngSubmit)="onSubmit()" #produitForm="ngForm" class="px-6 py-4">
+<!-- Reason --> 
+<div class="mb-6"> 
+<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reason</label> 
+<input type="text" name="raison" id="raison" [(ngModel)]="demande.raison" required 
+class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 
+focus:outline-none focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] 
+dark:bg-gray-700 dark:border-[#d6672b] dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#d6672b] dark:focus:border-[#d6672b]" 
+placeholder="Reason"> 
+</div> 
+<!-- Release Date --> 
+<div class="mb-6"> 
+<label for="card-expiration-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Release date</label> 
+<div class="relative"> 
+<div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"> 
+<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"> 
+<path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/> 
+</svg> 
+</div> 
+<input #datepickerInput 
+id="default-datepicker" type="text"[(ngModel)]="demande.dateSortiePause" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] " placeholder="Select date"> 
+</div> 
+</div> 
+<!-- Release Time + Return Time --> 
+<div class="flex flex-col md:flex-row gap-4 mb-6"> 
+<!-- Release Time --> 
+<div class="w-full md:w-1/2"> 
+<label for="heureS" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Release time</label> 
+<input type="time" id="heureS" name="heureS" [(ngModel)]="demande.dateSortie" 
+class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+focus:border-[#d6672b] focus:ring-[#d6672b] 
+dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#d6672b] dark:focus:ring-[#d6672b]"> 
+</div> 
+<!-- Return Time --> 
+<div class="w-full md:w-1/2"> 
+<label for="heureR" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Return time</label> 
+<input type="time" id="heureR" name="heureR" [(ngModel)]="demande.dateRetour" 
+(change)="handleReturnTimeChange()" 
+class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+focus:border-[#d6672b] focus:ring-[#d6672b] 
+dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#d6672b] dark:focus:ring-[#d6672b]"> 
+</div> 
+</div> 
+
+
+  <div class="flex justify-end space-x-2 border-t p-4 mt-4">
+    <button type="button" (click)="closeModal()" class="bg-gray-300 hover:bg-gray-200 px-5 py-2.5 rounded-lg text-sm font-medium text-[#6f7885]">Cancel</button>
+    <button type="submit"
+            class="text-white px-5 py-2.5 rounded-lg text-sm font-medium"
+            [style.backgroundColor]="isHoverSave ? '#b85622' : '#d6672b'"
+            (mouseover)="isHoverSave = true"
+            (mouseout)="isHoverSave = false">Save</button>
+  </div>
+</form>
+
+    </div>
+  </div>
+</div>

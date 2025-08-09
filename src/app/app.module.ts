@@ -17,6 +17,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { SuppStatutComponent } from './supp-statut/supp-statut.component';
 import { UpdateStatutComponent } from './update-statut/update-statut.component';
 import { FilterByLibellePipe } from './filter-by-libelle.pipe';
+import { EmployeeHeaderComponent } from './employee-header/employee-header.component';
+import { CreateDemandeComponent } from './create-demande/create-demande.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,9 @@ import { FilterByLibellePipe } from './filter-by-libelle.pipe';
     NotificationComponent,
     SuppStatutComponent,
     UpdateStatutComponent,
-    FilterByLibellePipe 
+    FilterByLibellePipe,
+    EmployeeHeaderComponent,
+    CreateDemandeComponent 
     
   ],
   imports: [

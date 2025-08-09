@@ -1,66 +1,30 @@
-import { Component,OnInit } from '@angular/core';
-import { StatutService } from '../../services/statut.service';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { DemandeService } from '../../services/demande-service.service';
+import { AuthService } from '../../services/auth-service.service';
+import { ToastrService } from 'ngx-toastr';
+import flatpickr from "flatpickr";
+
 @Component({
   selector: 'app-demande-pause',
   templateUrl: './demande-pause.component.html',
   styleUrls: ['./demande-pause.component.css']
 })
-export class DemandePauseComponent {
-  constructor(private statutService: StatutService) {}
-searchText: string = '';
-statuts: any[] = [];
-currentPage = 1;
-totalPages = 1;
-showModal = false;
-isHover = false;
-selectedStatutId: number | null = null;
-showModalSupp: boolean = false;
-showUpdateModal = false;
-selectedStatut = { libelle: '', couleur: '#d6672b' };
 
-openModalSupp(id: number): void {
-  console.log("Statut ID reçu:", id); 
-  this.selectedStatutId = id;
-  this.showModalSupp = true;
-}
-openModalUpdate(id: number): void {
-  console.log("Statut ID reçu:", id); 
-  this.selectedStatut = this.statuts.find(s => s.id === id);
-  this.showUpdateModal = true;}
+export class DemandePauseComponent{
+  constructor(private demandeService: DemandeService) {}
 
-closeUpdateModal() {
-  this.showUpdateModal = false;
-}
+  searchText: string = '';
+  demandes: any[] = [];
+  currentPage = 1;
+  totalPages = 1;
+  showModal = false;
+  isHover = false;
+  selectedStatutId: number | null = null;
 
- handleUpdate(updatedStatut: any) {
-    this.statutService.updateStatut(updatedStatut.id, updatedStatut).subscribe({
-      next: (res) => {
-        const index = this.statuts.findIndex(s => s.id === updatedStatut.id);
-        if (index !== -1) this.statuts[index] = updatedStatut;
 
-     
 
-        this.closeUpdateModal();
-      },
-      error: (err) => {
+  isHoverSave: boolean = false;
 
-console.log(err)      }
-    });
-  }
-supprimerStatut(id: number): void {
-  this.statutService.supprimerStatut(id).subscribe({
-    next: () => {
-      this.showModalSupp = false;
-     this.fetchStatuts(this.currentPage);
-    },
-    error: (err) => {
-      console.error(err);
-      alert("Erreur lors de la suppression");
-    }
-  });
-}
-
-  
 openModal() {
     this.showModal = true;
   }
@@ -68,19 +32,16 @@ openModal() {
  handleClose() {
     this.showModal = false;
   }
-ngOnInit() {
-    this.fetchStatuts(this.currentPage);
-  }
 
-  fetchStatuts(page: number) {
-    this.statutService.getStatuts(page).subscribe(response => {
-      this.statuts = response.data;
+    fetchDemandes(page: number) {
+    this.demandeService.getDemandes(page).subscribe(response => {
+      this.demandes = response.data;
       this.currentPage = response.current_page;
       this.totalPages = response.last_page;
     });
   }
 
   onPageChanged(page: number) {
-    this.fetchStatuts(page);
+    this.fetchDemandes(page);
   }
 }
