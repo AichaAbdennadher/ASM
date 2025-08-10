@@ -3,4 +3,32 @@
 @tailwind components;
 @tailwind utilities;
 
+.flatpickr-calendar {
+  width: 280px !important;      /* un peu plus large */
+  font-size: 0.85rem;           /* texte un peu plus grand */
+  padding: 8px !important;
+}
+
+.flatpickr-month {
+  padding: 4px 0 !important;
+  font-size: 0.9rem;
+}
+
+.flatpickr-weekdays {
+  padding: 4px 0 !important;
+  font-size: 0.8rem;
+}
+
+.flatpickr-days {
+  padding: 4px 4px 8px 4px !important;
+}
+
+.flatpickr-day {
+  width: 2rem !important;
+  height: 2rem !important;
+  line-height: 2rem !important;
+  font-size: 0.75rem !important;
+  margin: 0 2px !important;
+}
+
 

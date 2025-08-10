@@ -30,7 +30,16 @@ placeholder="Reason">
 </svg> 
 </div> 
 <input #datepickerInput 
-id="default-datepicker" type="text"[(ngModel)]="demande.dateSortiePause" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] " placeholder="Select date"> 
+id="default-datepicker" 
+type="text" 
+[(ngModel)]="demande.dateSortiePause" 
+class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+       block w-full ps-10 p-2.5 
+       focus:outline-none focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] 
+       dark:bg-gray-700 dark:border-[#d6672b] dark:placeholder-gray-400 dark:text-white 
+       dark:focus:ring-[#d6672b] dark:focus:border-[#d6672b]" 
+placeholder="Select date">
+
 </div> 
 </div> 
 <!-- Release Time + Return Time --> 
@@ -38,20 +47,31 @@ id="default-datepicker" type="text"[(ngModel)]="demande.dateSortiePause" class="
 <!-- Release Time --> 
 <div class="w-full md:w-1/2"> 
 <label for="heureS" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Release time</label> 
-<input type="time" id="heureS" name="heureS" [(ngModel)]="demande.dateSortie" 
-class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
-focus:border-[#d6672b] focus:ring-[#d6672b] 
-dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#d6672b] dark:focus:ring-[#d6672b]"> 
+<input type="time" 
+       id="heureS" 
+       name="heureS" 
+       [(ngModel)]="demande.dateSortie" 
+       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+              focus:outline-none focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] 
+              dark:bg-gray-700 dark:border-[#d6672b] dark:text-white 
+              dark:focus:ring-[#d6672b] dark:focus:border-[#d6672b]">
+
+
+
 </div> 
 <!-- Return Time --> 
 <div class="w-full md:w-1/2"> 
 <label for="heureR" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Return time</label> 
-<input type="time" id="heureR" name="heureR" [(ngModel)]="demande.dateRetour" 
-(change)="handleReturnTimeChange()" 
-class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
-focus:border-[#d6672b] focus:ring-[#d6672b] 
-dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-[#d6672b] dark:focus:ring-[#d6672b]"> 
-</div> 
+<input type="time" 
+       id="heureR" 
+       name="heureR" 
+       [(ngModel)]="demande.dateRetour" 
+       (change)="handleReturnTimeChange()" 
+       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 
+              focus:outline-none focus:ring-1 focus:ring-[#d6672b] focus:border-[#d6672b] 
+              dark:bg-gray-700 dark:border-[#d6672b] dark:text-white dark:placeholder:text-gray-400 
+              dark:focus:ring-[#d6672b] dark:focus:border-[#d6672b]">
+</div>
 </div> 
 
 

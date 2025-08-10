@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, EventEmitter, Input, Output, OnChanges, SimpleChanges  } from '@angular/core';
 import { DemandeService } from '../../services/demande-service.service';
 import { AuthService } from '../../services/auth-service.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import flatpickr from "flatpickr";
   styleUrls: ['./create-demande.component.css']
 })
 
-export class CreateDemandeComponent implements AfterViewInit{
+export class CreateDemandeComponent implements AfterViewInit , OnChanges {
   constructor(private auth: AuthService,private demandeService: DemandeService,private toastr: ToastrService) {}
 
     @Input() show: boolean = false;
@@ -31,11 +31,7 @@ demande = {
   emailEmployee: ''         // à remplir automatiquement avec l'utilisateur connecté
 };
   isHoverSave: boolean = false;
-  // Dans ton composant TypeScript
-  ngAfterViewInit() {
-  flatpickr(this.datepickerInput.nativeElement, {
-    dateFormat: "d/m/Y"
-  });}
+
 handleReturnTimeChange(): void {
   if (!this.demande.dateSortie || !this.demande.dateRetour) return;
 
@@ -91,6 +87,35 @@ if (user?.email) {
     },
   });
 }
+flatpickrInstance: any;
 
+  ngAfterViewInit() {
+    if (this.show) {
+      this.initFlatpickr();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['show'] && changes['show'].currentValue === true) {
+      // Modal vient d'être ouvert
+      this.initFlatpickr();
+    }
+  }
+
+  initFlatpickr() {
+    setTimeout(() => {
+      if (!this.flatpickrInstance) {
+        this.flatpickrInstance = flatpickr(this.datepickerInput.nativeElement, {
+          dateFormat: "Y-m-d",
+          onChange: (selectedDates: Date[], dateStr: string) => {
+            this.demande.dateSortiePause = dateStr;
+          }
+        });
+      } else {
+        this.flatpickrInstance.redraw();
+      }
+    }, 0);
+  }
 }
+
 

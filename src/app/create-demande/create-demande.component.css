@@ -1,0 +1,14 @@
+.flatpickr-calendar {
+  font-size: 12px; /* réduit la taille du texte */
+  padding: 5px;
+  width: auto; /* laisse s'adapter la largeur */
+}
+
+.flatpickr-day {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+  margin: 1px;
+}
+
+

@@ -20,13 +20,30 @@ export class DemandePauseComponent{
   showModal = false;
   isHover = false;
   selectedStatutId: number | null = null;
+  @ViewChild('datepickerInput') datepickerInput!: ElementRef;
 
-
+demande = {
+  raison: '',
+  dateSortie: '',
+  dateSortiePause: '',
+  dateRetour: '',
+  dateDemande: new Date(), // facultatif
+  statutId: 1,              // valeur par défaut, par exemple 'en attente'
+  emailEmployee: ''         // à remplir automatiquement avec l'utilisateur connecté
+};
 
   isHoverSave: boolean = false;
 
 openModal() {
     this.showModal = true;
+   // Attendre que la popup soit dans le DOM
+flatpickr(this.datepickerInput.nativeElement, {
+  dateFormat: "Y-m-d",
+  onChange: (selectedDates, dateStr) => {
+    this.demande.dateSortiePause = dateStr;
+  }
+});
+
   }
 
  handleClose() {
