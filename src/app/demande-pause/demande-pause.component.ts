@@ -57,7 +57,9 @@ flatpickr(this.datepickerInput.nativeElement, {
       this.totalPages = response.last_page;
     });
   }
-
+ngOnInit() {
+    this.fetchDemandes(this.currentPage);
+  }
   onPageChanged(page: number) {
     this.fetchDemandes(page);
   }

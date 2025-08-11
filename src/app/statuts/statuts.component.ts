@@ -59,9 +59,7 @@ supprimerStatut(id: number): void {
       alert("Erreur lors de la suppression");
     }
   });
-}
-
-  
+} 
 openModal() {
     this.showModal = true;
   }

@@ -59,25 +59,41 @@ this.toastr.error('Erreur : temps de pause > 2h');    this.demande.dateRetour = 
   }
 
 onSubmit(): void {
-const user = this.auth.getCurrentUser();
-if (!user?.email) {
-  this.toastr.error("Impossible d'envoyer : utilisateur non connecté.");
-  return;
-}
-this.demande.emailEmployee = user.email;
+  const user = this.auth.getCurrentUser();
+  if (!user?.email) {
+    this.toastr.error("Impossible d'envoyer : utilisateur non connecté.");
+    return;
+  }
 
+  this.demande.emailEmployee = user.email;
+
+  // Vérification que dateRetour >= dateSortie
+  if (this.demande.dateSortie && this.demande.dateRetour) {
+    if (this.demande.dateRetour < this.demande.dateSortie) {
+      this.toastr.error('La date de retour ne peut pas être inférieure à la date de sortie.');
+      return;
+    }
+  }
+  // Vérification dateSortiePause >= date système
+  if (this.demande.dateSortiePause) {
+    const today = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+    if (this.demande.dateSortiePause < today) {
+      this.toastr.error('La date de sortie en pause doit être supérieure ou égale à aujourd\'hui.');
+      return;
+    }
+  }
   const now = new Date();
   const payload = {
     raison: this.demande.raison,
     dateDemande: formatDate(now, 'yyyy-MM-dd', 'en-US'),
     dateSortiePause: this.demande.dateSortiePause, // "YYYY-MM-DD"
-    dateSortie: this.demande.dateSortie ? this.demande.dateSortie + ':00' : null,
-    dateRetour: this.demande.dateRetour ? this.demande.dateRetour + ':00' : null,
+    dateSortie: this.demande.dateSortie || null,
+    dateRetour: this.demande.dateRetour || null,
     statutId: 1,
     emailEmployee: this.demande.emailEmployee
   };
 
-  console.log('Payload envoyé à Laravel :', payload); // 🔍 Pour vérifier
+  console.log('Payload envoyé à Laravel :', payload);
 
   this.demandeService.ajouterDemande(payload).subscribe({
     next: () => {
@@ -85,11 +101,12 @@ this.demande.emailEmployee = user.email;
       this.close.emit();
     },
     error: (err) => {
-      console.error('Erreur lors de l\'ajout de la demande :', err);
-      this.toastr.error('Erreur lors de l\'ajout');
+      console.error("Erreur lors de l'ajout de la demande :", err);
+      this.toastr.error("Erreur lors de l'ajout");
     }
   });
 }
+
 
 flatpickrInstance: any;
 
