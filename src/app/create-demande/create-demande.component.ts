@@ -3,6 +3,7 @@ import { DemandeService } from '../../services/demande-service.service';
 import { AuthService } from '../../services/auth-service.service';
 import { ToastrService } from 'ngx-toastr';
 import flatpickr from "flatpickr";
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-create-demande',
@@ -58,35 +59,38 @@ this.toastr.error('Erreur : temps de pause > 2h');    this.demande.dateRetour = 
   }
 
 onSubmit(): void {
-  // Remplir l'email automatiquement depuis l'utilisateur connecté
 const user = this.auth.getCurrentUser();
-if (user?.email) {
-  this.demande.emailEmployee = user.email;
+if (!user?.email) {
+  this.toastr.error("Impossible d'envoyer : utilisateur non connecté.");
+  return;
 }
+this.demande.emailEmployee = user.email;
 
+  const now = new Date();
+  const payload = {
+    raison: this.demande.raison,
+    dateDemande: formatDate(now, 'yyyy-MM-dd', 'en-US'),
+    dateSortiePause: this.demande.dateSortiePause, // "YYYY-MM-DD"
+    dateSortie: this.demande.dateSortie ? this.demande.dateSortie + ':00' : null,
+    dateRetour: this.demande.dateRetour ? this.demande.dateRetour + ':00' : null,
+    statutId: 1,
+    emailEmployee: this.demande.emailEmployee
+  };
 
-  // Ajouter la date de demande actuelle
-  this.demande.dateDemande = new Date();
+  console.log('Payload envoyé à Laravel :', payload); // 🔍 Pour vérifier
 
-  this.demandeService.ajouterDemande(this.demande).subscribe({
-    next: (res) => {
-      // Réinitialiser le formulaire
-      this.demande = {
-        raison: '',
-        dateSortie: '',
-        dateSortiePause: '',
-        dateRetour: '',
-        dateDemande: new Date(),
-        statutId: 1, // par exemple : "en attente"
-        emailEmployee: user.email
-      };
-   
+  this.demandeService.ajouterDemande(payload).subscribe({
+    next: () => {
+      this.toastr.success('Demande ajoutée avec succès');
+      this.close.emit();
     },
     error: (err) => {
       console.error('Erreur lors de l\'ajout de la demande :', err);
-    },
+      this.toastr.error('Erreur lors de l\'ajout');
+    }
   });
 }
+
 flatpickrInstance: any;
 
   ngAfterViewInit() {

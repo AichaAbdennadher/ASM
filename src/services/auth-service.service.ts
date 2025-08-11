@@ -19,43 +19,46 @@ register(data: { name: string; familyName: string; email: string; password: stri
 login(data: any) {
   return this.http.post<any>('http://127.0.0.1:8000/api/login', data).pipe(
     tap(res => {
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('user', JSON.stringify(res.user)); // ← Important !
+      if (res.token) {
+        localStorage.setItem('token', res.token);
+      }
+      if (res.user) {
+        localStorage.setItem('user', JSON.stringify(res.user)); // si tu veux garder user aussi
+      }
     })
   );
 }
-
+getCurrentUser(): any {
+  const userStr = localStorage.getItem('user');
+  return userStr ? JSON.parse(userStr) : null;
+}
 
 logout(): Observable<any> {
   const token = localStorage.getItem('token');
-  console.log(' Token récupéré depuis localStorage :', token); 
+  console.log('Token récupéré depuis localStorage :', token);
 
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+  // Crée un HttpHeaders seulement si token existe
+  let headers = {};
+  if (token) {
+    headers = {
+      Authorization: `Bearer ${token}`
+    };
+  }
 
   return this.http.post(`${this.apiUrl}/logout`, {}, { headers }).pipe(
     tap(() => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       this.router.navigate(['/login']);
-      console.log(' Utilisateur déconnecté.');
+      console.log('Utilisateur déconnecté.');
     })
   );
 }
 
 
-getCurrentUser(): any {
-  const token = localStorage.getItem('token');
-  if (!token) return null;
 
-  try {
-    const decoded: any = jwtDecode(token);
-    return decoded;
-  } catch (error) {
-    console.error('Erreur lors du décodage du token :', error);
-    return null;
-  }
-}
+
+
 
 
   isLoggedIn(): boolean {
