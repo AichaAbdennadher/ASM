@@ -12,7 +12,7 @@ import flatpickr from "flatpickr";
 })
 export class DemandesComponent {
  constructor(private demandeService: DemandeService) {}
-
+showModalSupp: boolean = false;
   searchText: string = '';
   demandes: any[] = [];
   currentPage = 1;
@@ -63,5 +63,22 @@ ngOnInit() {
   onPageChanged(page: number) {
     this.fetchDemandes(page);
   }
+  openModalSupp(id: number): void {
+  console.log("Statut ID reçu:", id); 
+  this.selectedStatutId = id;
+  this.showModalSupp = true;
+}
+supprimerDemande(id: number): void {
+  this.demandeService.supprimerDemande(id).subscribe({
+    next: () => {
+      this.showModalSupp = false;
+     this.fetchDemandes(this.currentPage);
+    },
+    error: (err) => {
+      console.error(err);
+      alert("Erreur lors de la suppression");
+    }
+  });
+}
 }
 

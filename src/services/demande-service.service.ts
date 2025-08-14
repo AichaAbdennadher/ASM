@@ -31,5 +31,7 @@ getDureePauseMois(emailEmployee: string, dateSortiePause: string) {
     }
   });
 }
-
+supprimerDemande(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
