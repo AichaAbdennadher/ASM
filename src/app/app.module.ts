@@ -19,6 +19,16 @@ import { UpdateStatutComponent } from './update-statut/update-statut.component';
 import { FilterByLibellePipe } from './filter-by-libelle.pipe';
 import { EmployeeHeaderComponent } from './employee-header/employee-header.component';
 import { CreateDemandeComponent } from './create-demande/create-demande.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { DemandesComponent } from './demandes/demandes.component';
+import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
+import { SuppDemandeComponent } from './supp-demande/supp-demande.component';
+import { UpdateDemandeComponent } from './update-demande/update-demande.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { DashboardEmpComponent } from './dashboard-emp/dashboard-emp.component';
+import { ProfilComponent } from './profil/profil.component';
+import { NotifAdminComponent } from './notif-admin/notif-admin.component';
+import { NotifEmpComponent } from './notif-emp/notif-emp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +44,18 @@ import { CreateDemandeComponent } from './create-demande/create-demande.componen
     UpdateStatutComponent,
     FilterByLibellePipe,
     EmployeeHeaderComponent,
-    CreateDemandeComponent 
+    CreateDemandeComponent,
+    EmployeesComponent,
+    DemandesComponent,
+    FilterByNamePipe,
+    SuppDemandeComponent,
+    UpdateDemandeComponent,
+    DashboardAdminComponent,
+    DashboardEmpComponent,
+    ProfilComponent,
+    NotifAdminComponent,
+    NotifEmpComponent,
+    FilterByNamePipe
     
   ],
   imports: [

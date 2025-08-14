@@ -17,6 +17,7 @@ export class CreateDemandeComponent implements AfterViewInit , OnChanges {
     @Input() show: boolean = false;
       @Output() statutAdded = new EventEmitter<void>(); 
     @Output() close = new EventEmitter<void>();
+  isSubmitting: boolean = false; // ← Ajoute cette ligne
 
   @ViewChild('datepickerInput') datepickerInput!: ElementRef;
   
@@ -57,7 +58,6 @@ this.toastr.error('Erreur : temps de pause > 2h');    this.demande.dateRetour = 
   closeModal() {
     this.close.emit();
   }
-
 onSubmit(): void {
   const user = this.auth.getCurrentUser();
   if (!user?.email) {
@@ -67,14 +67,11 @@ onSubmit(): void {
 
   this.demande.emailEmployee = user.email;
 
-  // Vérification que dateRetour >= dateSortie
-  if (this.demande.dateSortie && this.demande.dateRetour) {
-    if (this.demande.dateRetour < this.demande.dateSortie) {
-      this.toastr.error('La date de retour ne peut pas être inférieure à la date de sortie.');
-      return;
-    }
+  // Vérifications front
+  if (this.demande.dateSortie && this.demande.dateRetour && this.demande.dateRetour < this.demande.dateSortie) {
+    this.toastr.error('La date de retour ne peut pas être inférieure à la date de sortie.');
+    return;
   }
-  // Vérification dateSortiePause >= date système
   if (this.demande.dateSortiePause) {
     const today = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
     if (this.demande.dateSortiePause < today) {
@@ -82,30 +79,41 @@ onSubmit(): void {
       return;
     }
   }
+
   const now = new Date();
   const payload = {
     raison: this.demande.raison,
     dateDemande: formatDate(now, 'yyyy-MM-dd', 'en-US'),
-    dateSortiePause: this.demande.dateSortiePause, // "YYYY-MM-DD"
+    dateSortiePause: this.demande.dateSortiePause,
     dateSortie: this.demande.dateSortie || null,
     dateRetour: this.demande.dateRetour || null,
     statutId: 1,
     emailEmployee: this.demande.emailEmployee
   };
 
-  console.log('Payload envoyé à Laravel :', payload);
-
   this.demandeService.ajouterDemande(payload).subscribe({
-    next: () => {
-      this.toastr.success('Demande ajoutée avec succès');
-      this.close.emit();
+    next: (res: any) => {
+      // 🔹 Succès seulement si le backend renvoie un objet créé avec un id
+      if (res?.id) {
+        this.toastr.success('Demande ajoutée avec succès');
+        this.close.emit();
+      } else if (res?.message) {
+        // Le backend a renvoyé un message d'erreur mais pas HTTP 422
+        this.toastr.error(res.message);
+      }
     },
     error: (err) => {
-      console.error("Erreur lors de l'ajout de la demande :", err);
-      this.toastr.error("Erreur lors de l'ajout");
+      const message = err.error?.message || 'Erreur lors de l\'ajout';
+      this.toastr.error(message);
+      console.error('Erreur ajout demande:', err);
     }
   });
 }
+
+
+
+
+
 
 
 flatpickrInstance: any;

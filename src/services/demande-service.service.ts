@@ -14,5 +14,22 @@ ajouterDemande(data: any): Observable<any> {
   getDemandes(page: number = 1) {
     return this.http.get<any>(`${this.apiUrl}?page=${page}`);
   }
+getDureePauseJour(emailEmployee: string, dateSortiePause: string) {
+  return this.http.get<number>(`${this.apiUrl}/duree-pause/jour`, {
+    params: {
+      emailEmployee: emailEmployee,
+      date: dateSortiePause
+    }
+  });
+}
+
+getDureePauseMois(emailEmployee: string, dateSortiePause: string) {
+  return this.http.get<number>(`${this.apiUrl}/duree-pause/mois`, {
+    params: {
+      emailEmployee: emailEmployee,
+      date: dateSortiePause
+    }
+  });
+}
 
 }

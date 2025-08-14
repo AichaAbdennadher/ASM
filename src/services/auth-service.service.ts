@@ -57,6 +57,14 @@ logout(): Observable<any> {
 
 
 
+getUsers(page: number) {
+  const token = localStorage.getItem('token'); // ou où tu stockes le token
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<any>(
+    `http://127.0.0.1:8000/api/users?page=${page}`,
+    { headers }
+  );
+}
 
 
 
