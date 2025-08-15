@@ -14,6 +14,8 @@ import { StatutService } from '../../services/statut.service';
 export class DemandesComponent {
  constructor(private demandeService: DemandeService,private statutService: StatutService) {}
 showModalSupp: boolean = false;
+selectedDemandeId!: number;
+selectedStatut: any = {};
   searchText: string = '';
   demandes: any[] = [];
   currentPage = 1;
@@ -26,7 +28,7 @@ showModalSupp: boolean = false;
 statutsMap: { [id: number]: any } = {};
 statuts: any[] = []; // tous les statuts de la base
 showUpdateModal = false;
-selectedStatut = { libelle: '', couleur: '#d6672b' };
+// selectedStatut = { libelle: '', couleur: '#d6672b' };
 demande = {
   raison: '',
   dateSortie: '',
@@ -85,19 +87,6 @@ fetchAllStatuts() {
     }
   });
 }
-
-// Modifier le statut d’une demande
-// updateDemandeStatut(demande: any) {
-//   const newStatutId = demande.statutId;
-//   this.demandeService.updateDemandeStatut(demande.id, newStatutId).subscribe({
-//     next: () => {
-//       console.log('Statut mis à jour avec succès');
-//     },
-//     error: (err) => {
-//       console.error('Erreur mise à jour statut', err);
-//     }
-//   });
-// }
 ngOnInit() {
     this.fetchDemandes(this.currentPage);
   const defaultStatutId = 1; // par exemple, l'ID par défaut
@@ -154,9 +143,12 @@ closeUpdateModal() {
 console.log(err)      }
     });
   }
-  openModalUpdate(id: number): void {
-  console.log("Statut ID reçu:", id); 
-  this.selectedStatut = this.demandes.find(s => s.id === id);
-  this.showUpdateModal = true;}
+
+
+openModalUpdate(id: number, statutId: number) {
+  this.selectedDemandeId = id;         // On stocke l’ID
+  this.selectedStatut = { id: statutId}; // On garde aussi l'ancien libellé
+  this.showUpdateModal = true;
+}
 }
 

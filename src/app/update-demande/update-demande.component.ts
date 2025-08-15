@@ -20,7 +20,7 @@ statutsMap: { [id: number]: any } = {};
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
 @Input() demandeId!: number;
-
+ancienLibelle!: string;
   isHoverSave = false;
 
   closeModal() {
@@ -30,6 +30,8 @@ ngOnInit() {
    this.fetchDemandes(this.currentPage);
   const defaultStatutId = 1; // par exemple, l'ID par défaut
       this.fetchAllStatuts();
+        this.ancienLibelle = this.statut.libelle; // Sauvegarde de l'ancien libellé
+
 
   }
 onSubmit() {

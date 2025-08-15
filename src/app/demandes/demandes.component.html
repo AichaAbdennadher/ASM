@@ -63,20 +63,23 @@
 </td>
 
             <td class="px-4 py-3">{{demande.dateDemande}}</td>
-                                        
-                  <td class="px-4 py-3">
-<a (click)="openModalUpdate(demande.id)" class="cursor-pointer">
-  <span class="relative px-1 py-2.5 rounded-md">
-    <box-icon name="edit" color="gray" size="s"></box-icon>
-  </span>
-</a> 
-<app-update-demande
-  [show]="showUpdateModal"
-  [statut]="selectedStatut"
-  (close)="closeUpdateModal()"
-  (save)="handleUpdate($event)"
- >
-</app-update-demande> 
+   <td class="px-4 py-3">
+  <a (click)="openModalUpdate(demande.id, demande.statut_id)" class="cursor-pointer">
+    <span class="relative px-1 py-2.5 rounded-md">
+      <box-icon name="edit" color="gray" size="s"></box-icon>
+    </span>
+  </a> 
+
+  <app-update-demande
+    [show]="showUpdateModal"
+    [demandeId]="selectedDemandeId"  
+    [statut]="selectedStatut"
+    (close)="closeUpdateModal()"
+    (save)="handleUpdate($event)"
+  >
+  </app-update-demande>
+
+
 <a (click)="openModalSupp(demande.id)" class="cursor-pointer">
   <span class="relative px-1 py-2.5 rounded-md">
     <box-icon name="trash" type="solid" color="rgb(252, 161, 81)" size="s"></box-icon>
