@@ -34,4 +34,12 @@ getDureePauseMois(emailEmployee: string, dateSortiePause: string) {
 supprimerDemande(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+updateDemandeStatut(demandeId: number, statutId: number) {
+  return this.http.put(`http://127.0.0.1:8000/api/demandes/${demandeId}/statut`, {
+    statutId
+  });
+}
+  updateDemande(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data);
+  }
 }

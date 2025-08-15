@@ -39,6 +39,7 @@
                         <th scope="col" class="px-4 py-3">Release date</th>
                         <th scope="col" class="px-4 py-3">Release time</th>
                         <th scope="col" class="px-4 py-3">Return time</th>
+                        <th scope="col" class="px-4 py-3">Status</th>
                         <th scope="col" class="px-4 py-3">request date</th>
                         <th scope="col" class="px-4 py-3">Action</th>
                     </tr>
@@ -51,20 +52,31 @@
                       <td class="px-4 py-3">{{demande.dateSortiePause}}</td>
                       <td class="px-4 py-3">{{demande.dateSortie}}</td>
                       <td class="px-4 py-3">{{demande.dateRetour}}</td>
-                      <td class="px-4 py-3">{{demande.dateDemande}}</td>
+<td class="px-4 py-3">
+  <div class="flex items-center space-x-2">
+    <span 
+      class="inline-block w-2 h-2 rounded-full mt-[0.25px]" 
+      [style.background-color]="statutsMap[demande.statutId]?.couleur">
+    </span>
+    <span class="leading-none">{{ statutsMap[demande.statutId]?.libelle }}</span>
+  </div>
+</td>
+
+            <td class="px-4 py-3">{{demande.dateDemande}}</td>
                                         
                   <td class="px-4 py-3">
-<!-- <a (click)="openModalUpdate(statut.id)" class="cursor-pointer">
+<a (click)="openModalUpdate(demande.id)" class="cursor-pointer">
   <span class="relative px-1 py-2.5 rounded-md">
     <box-icon name="edit" color="gray" size="s"></box-icon>
   </span>
-</a> -->
-<!-- <app-update-statut
+</a> 
+<app-update-demande
   [show]="showUpdateModal"
   [statut]="selectedStatut"
   (close)="closeUpdateModal()"
-  (save)="handleUpdate($event)">
-</app-update-statut> -->
+  (save)="handleUpdate($event)"
+ >
+</app-update-demande> 
 <a (click)="openModalSupp(demande.id)" class="cursor-pointer">
   <span class="relative px-1 py-2.5 rounded-md">
     <box-icon name="trash" type="solid" color="rgb(252, 161, 81)" size="s"></box-icon>
