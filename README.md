@@ -53,15 +53,7 @@ L'interface est construite avec Angular et Tailwind CSS. Les notifications, les 
 | Dates | flatpickr |
 | Backend attendu | API REST accessible sur `http://127.0.0.1:8000/api` |
 
-## Architecture
 
-```mermaid
-flowchart TD
-    UI[Composants Angular] --> R[Angular Router]
-    UI --> S[Services Angular]
-    S --> API[API REST Laravel]
-    S --> LS[LocalStorage]
-    UI --> TW[Tailwind CSS]
 ```
 
 Le code applicatif est organisé par responsabilité :
