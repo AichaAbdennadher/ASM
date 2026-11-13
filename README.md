@@ -11,7 +11,7 @@
 - [Présentation](#présentation)
 - [Fonctionnalités](#fonctionnalités)
 - [Stack technique](#stack-technique)
-- [Architecture](#architecture)
+
 - [Prérequis](#prérequis)
 - [Installation](#installation)
 - [Exécution](#exécution)
